@@ -18,6 +18,8 @@ This bot has been discontinued. It integrated with a database; structure of the 
   ```.bbgame``` simple basketball shooting game  
   ```.fbgame``` simple football game  
   ```.blgame``` simple bowling game
+  
+(Also has utility, math, and other fun commands to choose from)
 
 ### Info:
 The support links (the discord server is deleted) and the bot's page in top.gg and other sites have also been discontinued. Therefore, it is not available on these websites anymore.  
