@@ -4,10 +4,10 @@ This bot has been discontinued and is integrated with a database, the structure 
 
 ###Commands:
 
-It has tons of features such as a role playing game featuring functional commands which pull and interact with data stored on a MySQL database, exmaples:
+It has tons of features such as a role playing game featuring functional commands which pull and interact with data stored on a MySQL database, exmaples:  
 ```.quest``` to gain expierence points and coins  
-```.train``` to train your stats and gain coins 
-```.fight``` use your items and combat against npc 
+```.train``` to train your stats and gain coins  
+```.fight``` use your items and combat against npc  
 ```.duel``` fight against your friends in a duel
 
 The bot also has a guessing game which displays a picture of a certain character, place, or setting allowing the user to guess said picture:
