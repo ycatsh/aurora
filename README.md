@@ -1,6 +1,7 @@
 ## Aurora - Discord Bot
 
 This bot has been discontinued. It integrated with a database; structure of the database will be added shortly.
+Some of the code is outdated as this bot has made inactive since mid 2021.
 
 ### Commands:
 
