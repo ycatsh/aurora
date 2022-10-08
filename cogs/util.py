@@ -7,6 +7,7 @@ import os
 from itertools import permutations
 
 s_time = time.time()
+
 intents = discord.Intents.default()
 intents.messages = True
 bot = commands.Bot(command_prefix = ".", case_insensitive=True, intents=intents)
