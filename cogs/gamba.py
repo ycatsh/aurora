@@ -9,7 +9,9 @@ db = mysql.connector.connect(
 
 cursor = db.cursor()
 
-bot = commands.Bot(command_prefix = ".", case_insensitive=True)
+intents = discord.Intents.all()
+intents.messages = True
+bot = commands.Bot(command_prefix = ".", case_insensitive=True, intents=intents)
 
 class Gamba(commands.Cog):
     def __init__(self, bot):
