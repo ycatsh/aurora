@@ -1,24 +1,23 @@
 import discord
-import os
 import random
-from discord.ext import commands
 import itertools
 import asyncio
 import datetime
-from discord.ext.commands import has_permissions
-from discord.ext.commands import cooldown, BucketType
 import datetime
 import time
+from discord.ext.commands import has_permissions
+from discord.ext.commands import cooldown, BucketType
+from discord.ext import commands
 from aurora_lists import *
-from secrets import db, reddit
+from secrets import DISCORD_TOKEN, db, reddit
 
-token = os.environ.get('TOKEN')
 s_time = time.time()
 
 cursor = db.cursor()
 
 intents = discord.Intents.all()
 intents.messages = True
+
 bot = commands.Bot(command_prefix=".", case_insensitive=True, intents=intents)
 
 bot.remove_command("help")
@@ -3725,4 +3724,4 @@ async def geo(ctx):
 
 db.commit()
 
-bot.run(token)
+bot.run(DISCORD_TOKEN)
