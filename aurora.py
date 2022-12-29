@@ -9,7 +9,7 @@ from discord.ext.commands import has_permissions
 from discord.ext.commands import cooldown, BucketType
 from discord.ext import commands
 from aurora_lists import *
-from secrets import DISCORD_TOKEN, db, reddit
+from aurora_secrets import DISCORD_TOKEN, db, reddit
 
 s_time = time.time()
 
