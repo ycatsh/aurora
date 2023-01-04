@@ -5,8 +5,6 @@ import asyncio
 import datetime
 import datetime
 import time
-from discord.ext.commands import has_permissions
-from discord.ext.commands import cooldown, BucketType
 from discord.ext import commands
 from aurora_lists import *
 from aurora_secrets import DISCORD_TOKEN, db, reddit
@@ -52,228 +50,6 @@ async def on_guild_join(guild):
 
             await channel.send(embed=join)
             break
-
-
-@bot.event
-async def on_command_error(ctx, error):
-    error = getattr(error, 'original', error)
-    if isinstance(error, commands.MissingPermissions):
-        await ctx.send("You can't do that :( ")
-    elif isinstance(error, commands.MemberNotFound):
-        Finthechat = discord.Embed(title=" ", description=" ", color=0xffb12b)
-        Finthechat.add_field(
-            name="Error", value="Please mention a user\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-        await ctx.send(embed=Finthechat)
-    elif isinstance(error, commands.MissingRequiredArgument):
-        if ctx.command.name == "findnum":
-            Finthechat = discord.Embed(
-                title=" ", description=" ", color=0xffb12b)
-            Finthechat.add_field(
-                name="Error", value="please enter a valid number between 1 to 10 (not decimal)\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-            await ctx.send(embed=Finthechat)
-        elif ctx.command.name == "8ball":
-            Finthechat = discord.Embed(
-                title=" ", description=" ", color=0xffb12b)
-            Finthechat.add_field(
-                name="Error", value="please type down a message after the ``.8ball``\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-            await ctx.reply(embed=Finthechat, mention_author=False)
-        elif ctx.command.name == "dp":
-            Finthechat = discord.Embed(
-                title=" ", description=" ", color=0xffb12b)
-            Finthechat.add_field(
-                name="Error", value="please enter the number of items you want\nformat: ``.shop <item> <number>``\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-            await ctx.reply(embed=Finthechat, mention_author=False)
-        elif ctx.command.name == "hp":
-            Finthechat = discord.Embed(
-                title=" ", description=" ", color=0xffb12b)
-            Finthechat.add_field(
-                name="Error", value="please enter the number of items you want\nformat: ``.shop <item> <number>``\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-            await ctx.reply(embed=Finthechat, mention_author=False)
-        elif ctx.command.name == "vp":
-            Finthechat = discord.Embed(
-                title=" ", description=" ", color=0xffb12b)
-            Finthechat.add_field(
-                name="Error", value="please enter the number of items you want\nformat: ``.shop <item> <number>``\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-            await ctx.reply(embed=Finthechat, mention_author=False)
-        elif ctx.command.name == "slots":
-            Finthechat = discord.Embed(
-                title=" ", description=" ", color=0xffb12b)
-            Finthechat.add_field(
-                name="Error", value="please enter a valid amount to gamble with\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-            await ctx.reply(embed=Finthechat, mention_author=False)
-        else:
-            Finthechat = discord.Embed(
-                title=" ", description=" ", color=0xffb12b)
-            Finthechat.add_field(
-                name="Error", value="please enter the necessary arguments\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-            await ctx.send(embed=Finthechat)
-    elif isinstance(error, commands.CommandOnCooldown):
-        if ctx.command.name == "meme":
-            cool = discord.Embed(title="Slow it down",
-                                 description=" ", color=0xa58fff)
-            cool.add_field(
-                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.meme`` is ``1s``\nTry again in ``{error.retry_after:.2f}s``")
-            await ctx.send(embed=cool)
-        elif ctx.command.name == "highlow":
-            cool = discord.Embed(title="Slow it down",
-                                 description=" ", color=0xa58fff)
-            cool.add_field(
-                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.highlow`` is ``10s``\nTry again in ``{error.retry_after:.2f}s``")
-            await ctx.send(embed=cool)
-        elif ctx.command.name == "anime":
-            cool = discord.Embed(title="Slow it down",
-                                 description=" ", color=0xa58fff)
-            cool.add_field(
-                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.anime`` is ``5s``\nTry again in ``{error.retry_after:.2f}s``")
-            await ctx.send(embed=cool)
-        elif ctx.command.name == "geo":
-            cool = discord.Embed(title="Slow it down",
-                                 description=" ", color=0xa58fff)
-            cool.add_field(
-                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.geo`` is ``5s``\nTry again in ``{error.retry_after:.2f}s``")
-            await ctx.send(embed=cool)
-        elif ctx.command.name == "sw":
-            cool = discord.Embed(title="Slow it down",
-                                 description=" ", color=0xa58fff)
-            cool.add_field(
-                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.sw`` is ``5s``\nTry again in ``{error.retry_after:.2f}s``")
-            await ctx.send(embed=cool)
-        elif ctx.command.name == "shoot":
-            cool = discord.Embed(title="Slow it down",
-                                 description=" ", color=0xa58fff)
-            cool.add_field(
-                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.shoot`` is ``3s``\nTry again in ``{error.retry_after:.2f}s``")
-            await ctx.send(embed=cool)
-        elif ctx.command.name == "kickball":
-            cool = discord.Embed(title="Slow it down",
-                                 description=" ", color=0xa58fff)
-            cool.add_field(
-                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.kickball`` is ``3s``\nTry again in ``{error.retry_after:.2f}s``")
-            await ctx.send(embed=cool)
-        elif ctx.command.name == "bowl":
-            cool = discord.Embed(title="Slow it down",
-                                 description=" ", color=0xa58fff)
-            cool.add_field(
-                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.bowl`` is ``3s``\nTry again in ``{error.retry_after:.2f}s``")
-            await ctx.send(embed=cool)
-        elif ctx.command.name == "hack":
-            cool = discord.Embed(title="Slow it down",
-                                 description=" ", color=0xa58fff)
-            cool.add_field(
-                name="⏪ ⏪ ⏪", value=f"don't hack people too much, Default cooldown for ``.hack`` is ``30s``\nTry again in ``{error.retry_after:.2f}s``")
-            await ctx.send(embed=cool)
-        elif ctx.command.name == "quest":
-            cool = discord.Embed(title="Slow it down",
-                                 description=" ", color=0xa58fff)
-            cool.add_field(
-                name="⏪ ⏪ ⏪", value=f"you have already hunted enough, Default cooldown for ``.quest`` is ``30s``\nTry again in ``{error.retry_after:.2f}s``")
-            await ctx.send(embed=cool)
-        elif ctx.command.name == "train":
-            cool = discord.Embed(title="Slow it down",
-                                 description=" ", color=0xa58fff)
-            cool.add_field(
-                name="⏪ ⏪ ⏪", value=f"you have already trained, Default cooldown for ``.train`` is ``45s``\nTry again in ``{error.retry_after:.2f}s``")
-            await ctx.send(embed=cool)
-        elif ctx.command.name == "dp":
-            cool = discord.Embed(title="Slow it down",
-                                 description=" ", color=0xa58fff)
-            cool.add_field(
-                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.buy`` and ``.use`` is ``20s``\nTry again in ``{error.retry_after:.2f}s``")
-            await ctx.send(embed=cool)
-        elif ctx.command.name == "hp":
-            cool = discord.Embed(title="Slow it down",
-                                 description=" ", color=0xa58fff)
-            cool.add_field(
-                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.buy`` and ``.use`` is ``20s``\nTry again in ``{error.retry_after:.2f}s``")
-            await ctx.send(embed=cool)
-        elif ctx.command.name == "vp":
-            cool = discord.Embed(title="Slow it down",
-                                 description=" ", color=0xa58fff)
-            cool.add_field(
-                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.buy`` and ``.use`` is ``20s``\nTry again in ``{error.retry_after:.2f}s``")
-            await ctx.send(embed=cool)
-        elif ctx.command.name == "qg":
-            cool = discord.Embed(title="Slow it down",
-                                 description=" ", color=0xa58fff)
-            cool.add_field(
-                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.buy`` and ``.use`` is ``20s``\nTry again in ``{error.retry_after:.2f}s``")
-            await ctx.send(embed=cool)
-        elif ctx.command.name == "eb":
-            cool = discord.Embed(title="Slow it down",
-                                 description=" ", color=0xa58fff)
-            cool.add_field(
-                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.buy`` and ``.use`` is ``20s``\nTry again in ``{error.retry_after:.2f}s``")
-            await ctx.send(embed=cool)
-        elif ctx.command.name == "orb":
-            cool = discord.Embed(title="Slow it down",
-                                 description=" ", color=0xa58fff)
-            cool.add_field(
-                name="⏪ ⏪ ⏪", value=f"Default cooldown for this item\n``.buy`` - ``20s``\n``.use`` - ``3hr``\nTry again in ``{error.retry_after:.2f}s``")
-            await ctx.send(embed=cool)
-        elif ctx.command.name == "molecule":
-            cool = discord.Embed(title="Slow it down",
-                                 description=" ", color=0xa58fff)
-            cool.add_field(
-                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.buy`` and ``.use`` is ``20s``\nTry again in ``{error.retry_after:.2f}s``")
-            await ctx.send(embed=cool)
-        elif ctx.command.name == "box":
-            cool = discord.Embed(title="Slow it down",
-                                 description=" ", color=0xa58fff)
-            cool.add_field(
-                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.box`` is ``2m``\nTry again in ``{error.retry_after:.2f}s``")
-            await ctx.send(embed=cool)
-        elif ctx.command.name == "slots":
-            cool = discord.Embed(title="Slow it down",
-                                 description=" ", color=0xa58fff)
-            cool.add_field(
-                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.slots`` is ``10s``\nTry again in ``{error.retry_after:.2f}s``")
-            await ctx.send(embed=cool)
-        elif ctx.command.name == "duel":
-            cool = discord.Embed(title="Slow it down",
-                                 description=" ", color=0xa58fff)
-            cool.add_field(
-                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.duel`` is ``5m``\nTry again in ``{error.retry_after:.2f}s``")
-            await ctx.send(embed=cool)
-        elif ctx.command.name == "fight":
-            cool = discord.Embed(title="Slow it down",
-                                 description=" ", color=0xa58fff)
-            cool.add_field(
-                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.fight`` is ``30s``\nTry again in ``{error.retry_after:.2f}s``")
-            await ctx.send(embed=cool)
-    elif isinstance(error, discord.Forbidden):
-        if ctx.command.name == "purge":
-            Finthechat = discord.Embed(
-                title=" ", description=" ", color=0xffb12b)
-            Finthechat.add_field(
-                name="Error", value="I'm missing the manage messages permission!\n_ _\n**Check the following:**\nAurora BOT Role permissions\nChannel permissions\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-            await ctx.send(embed=Finthechat)
-        else:
-            Finthechat = discord.Embed(
-                title=" ", description=" ", color=0xffb12b)
-            Finthechat.add_field(
-                name="Error", value="I'm missing the manage messages permission!\n_ _\n**Check the following:**\nAurora BOT Role permissions\nChannel permissions\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-            await ctx.send(embed=Finthechat)
-    elif isinstance(error, commands.CommandInvokeError):
-        if ctx.command.name == "perm":
-            Finthechat = discord.Embed(
-                title=" ", description=" ", color=0xffb12b)
-            Finthechat.add_field(
-                name="Error", value="The output was more than 2000 characters, maybe try shortening your argument\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-            await ctx.send(embed=Finthechat)
-    elif isinstance(error, discord.HTTPException):
-        if ctx.command.name == "perm":
-            Finthechat = discord.Embed(
-                title=" ", description=" ", color=0xffb12b)
-            Finthechat.add_field(
-                name="Error", value="The output was more than 2000 characters, maybe try shortening your argument\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-            await ctx.send(embed=Finthechat)
-    elif isinstance(error, commands.BadArgument):
-        if ctx.command.name == "perm":
-            Finthechat = discord.Embed(
-                title=" ", description=" ", color=0xffb12b)
-            Finthechat.add_field(
-                name="Error", value="Space the numbers and try again\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-            await ctx.send(embed=Finthechat)
 
 
 @bot.group(invoke_without_command=True)
@@ -349,72 +125,9 @@ async def rpg_info(ctx):
     await ctx.send(embed=info)
 
 
-@bot.group(name="market", invoke_without_command=True)
-async def market(ctx):
-    await ctx.send("UNDER DEV")
-
-    cursor.execute(
-        "SELECT * FROM user_market WHERE client_id = %s", [ctx.author.id])
-    result = cursor.fetchall()
-
-    if len(result) == 0:
-        cursor.execute(
-            "INSERT INTO user_market VALUES(%s, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)", [ctx.author.id])
-        db.commit()
-
-    mp = discord.Embed(
-        title="MARKETPLACE", description="run ``.market info`` to learn more\nThe Following are the items you can buy from respective companies", color=random.choice(colors))
-    mp.add_field(name="Essencery",
-                 value=f"Potato ─ 10 | *ID* → ``potato``\nCorn ─ 20 | *ID* → ``corn``\nCookies ─ 50 | *ID* → ``cookies``", inline=False)
-    mp.add_field(name="Books & Co.",
-                 value=f"Pens ─ 5 | *ID* → ``pens``\nSheets ─ 10 | *ID* → ``sheets``\nManga ─ 1000 | *ID* → ``manga``", inline=False)
-    mp.add_field(name="Utlity Mart", value=f"Screws ─ 20 | *ID* → ``screws``\nHammer ─ 400 | *ID* → ``hammer``\nPower Drill ─ 2000 | *ID* → ``pwrdrill``", inline=False)
-    mp.add_field(name="Solitare", value=f"Gold ─ 10000 | *ID* → ``gold``\nPlatinum ─ 15000 | *ID* → ``plat``\nDiamond ─ 20000 | *ID* → ``diamond``", inline=False)
-    mp.set_footer(text="run < .market buy id quantity > to buy these items")
-    await ctx.send(embed=mp)
-
-
-@market.command(name="info")
-async def market_info(ctx):
-    await ctx.send("UNDER DEV")
-
-    cursor.execute(
-        "SELECT * FROM user_market WHERE client_id = %s", [ctx.author.id])
-    result = cursor.fetchall()
-
-    if len(result) == 0:
-        cursor.execute(
-            "INSERT INTO user_market VALUES(%s, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)", [ctx.author.id])
-        db.commit()
-
-    mi = discord.Embed(title="MARKETPLACE - INFO",
-                       description="⚠️ Please read the following carefully: every aspect of this is completely fictional and any refrences to real life is purely  coincidental", color=random.choice(colors))
-    mi.add_field(name="Basic Idea",
-                 value="To be the richest, your main focus would be to become rich", inline=False)
-    mi.add_field(name="How is it done?", value="by running ``.market`` you can buy items, This works in favor of the company selling the particular item. You can also invest in companies by ``.stocks``, keep in mind you can make/lose coins depending upon the company's stock prices", inline=False)
-    mi.add_field(name="Basic things you need to know",
-                 value="If a certain item is bought alot its value is bound to decrease, which may be beneficial to the particular company selling this 'item' hence affecting its stock prices and Net Worth", inline=False)
-    mi.add_field(name="A few Rules", value="``1.`` All transactions of coins are your responsibility\n``2.`` If you lose coins after investing, its again your responsibility and refunds will not be entertained", inline=False)
-    await ctx.send(embed=mi)
-
-
-@market.command(name="buy")
-async def market_buy(ctx):
-    await ctx.send("UNDER DEV")
-
-
-@bot.group(name="stocks", aliases=["stock"], invoke_without_command=True)
-async def stocks(ctx):
-    await ctx.send("UNDER DEV")
-
-
 @bot.command()
 @commands.cooldown(1, 30, commands.BucketType.user)
 async def quest(ctx):
-    phrases = ["You went on a quest and stumbled upon a ",
-               "You searched everywhere and found ", "You went on a quest to find a "]
-    creatures = ["<:slime:834307353674514503> **Creature:** slime", "<:zombie_eye:834308369052467230> **Creature:** zombie", ":bear: **Creature:** bear", ":skull: **Creature:** skeleton", "<:pixel_bat:834309758479499264> **Creature:** vampire",
-                 "<:pixel_snake:834310428838068265> **Creature:** snake", ":japanese_goblin: **Creature:** goblin", "<:giant:834311363115352066> **Creature:** giant", ":wolf: **Creature:** wolf", ":spider: **Creature:** giant spider"]
     COINS = random.randint(5, 20)
     XP = random.randint(20, 80)
     x = random.randint(1, 500)
@@ -856,10 +569,10 @@ async def shop_info(ctx, message):
             url="https://media.discordapp.net/attachments/807511480878497806/848820623127216128/molecule.png")
         await ctx.send(embed=se)
     else:
-        Finthechat = discord.Embed(title=" ", description=" ", color=0xffb12b)
-        Finthechat.add_field(
+        error_msg = discord.Embed(title=" ", description=" ", color=0xffb12b)
+        error_msg.add_field(
             name="Error", value="please enter a valid item's ID to get more information on it\nFormat: ``.shop info <id>``\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-        await ctx.reply(embed=Finthechat, mention_author=False)
+        await ctx.reply(embed=error_msg, mention_author=False)
 
 
 @bot.group(name="sell", invoke_without_command=True)
@@ -869,10 +582,10 @@ async def sell(ctx):
 
 @bot.group(name="buy", invoke_without_command=True)
 async def buy(ctx):
-    Finthechat = discord.Embed(title=" ", description=" ", color=0xffb12b)
-    Finthechat.add_field(
+    error_msg = discord.Embed(title=" ", description=" ", color=0xffb12b)
+    error_msg.add_field(
         name="Error", value="please enter a valid amount and a valid ID to buy an item\nFormat: ``.buy <item id> <amount>``\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-    await ctx.reply(embed=Finthechat, mention_author=False)
+    await ctx.reply(embed=error_msg, mention_author=False)
 
 
 @buy.command(name="dp")
@@ -907,10 +620,10 @@ async def buy_dp(ctx, *, message):
                 db.commit()
 
     except ValueError:
-        Finthechat = discord.Embed(title=" ", description=" ", color=0xffb12b)
-        Finthechat.add_field(
+        error_msg = discord.Embed(title=" ", description=" ", color=0xffb12b)
+        error_msg.add_field(
             name="Error", value="please enter a valid amount of the item you're trying to buy \nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-        await ctx.reply(embed=Finthechat, mention_author=False)
+        await ctx.reply(embed=error_msg, mention_author=False)
 
 
 @buy.command(name="hp")
@@ -945,10 +658,10 @@ async def buy_hp(ctx, *, message):
             db.commit()
 
     except ValueError:
-        Finthechat = discord.Embed(title=" ", description=" ", color=0xffb12b)
-        Finthechat.add_field(
+        error_msg = discord.Embed(title=" ", description=" ", color=0xffb12b)
+        error_msg.add_field(
             name="Error", value="please enter a valid amount of the item you're trying to buy \nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-        await ctx.reply(embed=Finthechat, mention_author=False)
+        await ctx.reply(embed=error_msg, mention_author=False)
 
 
 @buy.command(name="vp")
@@ -983,10 +696,10 @@ async def buy_vp(ctx, *, message):
                 db.commit()
 
     except ValueError:
-        Finthechat = discord.Embed(title=" ", description=" ", color=0xffb12b)
-        Finthechat.add_field(
+        error_msg = discord.Embed(title=" ", description=" ", color=0xffb12b)
+        error_msg.add_field(
             name="Error", value="please enter a valid amount of the item you're trying to buy \nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-        await ctx.reply(embed=Finthechat, mention_author=False)
+        await ctx.reply(embed=error_msg, mention_author=False)
 
 
 @buy.command(name="qg")
@@ -1021,10 +734,10 @@ async def buy_qg(ctx, *, message):
                 db.commit()
 
     except ValueError:
-        Finthechat = discord.Embed(title=" ", description=" ", color=0xffb12b)
-        Finthechat.add_field(
+        error_msg = discord.Embed(title=" ", description=" ", color=0xffb12b)
+        error_msg.add_field(
             name="Error", value="please enter a valid amount of the item you're trying to buy \nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-        await ctx.reply(embed=Finthechat, mention_author=False)
+        await ctx.reply(embed=error_msg, mention_author=False)
 
 
 @buy.command(name="eb")
@@ -1059,10 +772,10 @@ async def buy_eb(ctx, *, message):
                 db.commit()
 
     except ValueError:
-        Finthechat = discord.Embed(title=" ", description=" ", color=0xffb12b)
-        Finthechat.add_field(
+        error_msg = discord.Embed(title=" ", description=" ", color=0xffb12b)
+        error_msg.add_field(
             name="Error", value="please enter a valid amount of the item you're trying to buy \nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-        await ctx.reply(embed=Finthechat, mention_author=False)
+        await ctx.reply(embed=error_msg, mention_author=False)
 
 
 @buy.command(name="orb")
@@ -1097,10 +810,10 @@ async def buy_orb(ctx, *, message):
                 db.commit()
 
     except ValueError:
-        Finthechat = discord.Embed(title=" ", description=" ", color=0xffb12b)
-        Finthechat.add_field(
+        error_msg = discord.Embed(title=" ", description=" ", color=0xffb12b)
+        error_msg.add_field(
             name="Error", value="please enter a valid amount of the item you're trying to buy \nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-        await ctx.reply(embed=Finthechat, mention_author=False)
+        await ctx.reply(embed=error_msg, mention_author=False)
 
 
 @buy.command(name="molecule")
@@ -1134,18 +847,18 @@ async def buy_molecule(ctx, *, message):
                 db.commit()
 
     except ValueError:
-        Finthechat = discord.Embed(title=" ", description=" ", color=0xffb12b)
-        Finthechat.add_field(
+        error_msg = discord.Embed(title=" ", description=" ", color=0xffb12b)
+        error_msg.add_field(
             name="Error", value="please enter a valid amount of the item you're trying to buy \nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-        await ctx.reply(embed=Finthechat, mention_author=False)
+        await ctx.reply(embed=error_msg, mention_author=False)
 
 
 @bot.group(name="use", invoke_without_command=True)
 async def use(ctx):
-    Finthechat = discord.Embed(title=" ", description=" ", color=0xffb12b)
-    Finthechat.add_field(
+    error_msg = discord.Embed(title=" ", description=" ", color=0xffb12b)
+    error_msg.add_field(
         name="Error", value="please enter a valid ID to use an item\nFormat: ``.use <item id> <quantity>``\n``quantity`` doesnt apply for these items: ``orb``, ``box``\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-    await ctx.reply(embed=Finthechat, mention_author=False)
+    await ctx.reply(embed=error_msg, mention_author=False)
 
 
 @use.command(name="dp")
@@ -1175,10 +888,10 @@ async def use_dp(ctx, *, message):
                 await ctx.reply(f"You chugged down {message} {dpe} ``Durability Potion (s)`` to gain ``+{final}`` DEF", mention_author=False)
                 db.commit()
     except ValueError:
-        Finthechat = discord.Embed(title=" ", description=" ", color=0xffb12b)
-        Finthechat.add_field(
+        error_msg = discord.Embed(title=" ", description=" ", color=0xffb12b)
+        error_msg.add_field(
             name="Error", value="please enter a valid amount of the item you're trying to use \nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-        await ctx.reply(embed=Finthechat, mention_author=False)
+        await ctx.reply(embed=error_msg, mention_author=False)
 
 
 @use.command(name="hp")
@@ -1210,10 +923,10 @@ async def use_hp(ctx, *, message):
                 db.commit()
 
     except ValueError:
-        Finthechat = discord.Embed(title=" ", description=" ", color=0xffb12b)
-        Finthechat.add_field(
+        error_msg = discord.Embed(title=" ", description=" ", color=0xffb12b)
+        error_msg.add_field(
             name="Error", value="please enter a valid amount of the item you're trying to buy \nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-        await ctx.reply(embed=Finthechat, mention_author=False)
+        await ctx.reply(embed=error_msg, mention_author=False)
 
 
 @use.command(name="vp")
@@ -1242,10 +955,10 @@ async def use_vp(ctx, *, message):
                 await ctx.reply(f"You chugged down {message} {vpe} ``Vigour Potion (s)`` to gain ``+{final}`` ATTCK", mention_author=False)
                 db.commit()
     except ValueError:
-        Finthechat = discord.Embed(title=" ", description=" ", color=0xffb12b)
-        Finthechat.add_field(
+        error_msg = discord.Embed(title=" ", description=" ", color=0xffb12b)
+        error_msg.add_field(
             name="Error", value="please enter a valid amount of the item you're trying to buy \nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-        await ctx.reply(embed=Finthechat, mention_author=False)
+        await ctx.reply(embed=error_msg, mention_author=False)
 
 
 @use.command(name="orb")
@@ -2166,10 +1879,10 @@ async def slots(ctx, *, message):
 
     except ValueError:
 
-        Finthechat = discord.Embed(title=" ", description=" ", color=0xffb12b)
-        Finthechat.add_field(
+        error_msg = discord.Embed(title=" ", description=" ", color=0xffb12b)
+        error_msg.add_field(
             name="Error", value="Please enter a valid amount\nrun ``.slots info`` for more information\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-        await ctx.send(embed=Finthechat)
+        await ctx.send(embed=error_msg)
 
 
 @slots.command(name="info")
@@ -3519,10 +3232,10 @@ async def oddeven(ctx, *, message):
         return
 
     if message != "odd" or "even":
-        Finthechat = discord.Embed(title=" ", description=" ", color=0xffb12b)
-        Finthechat.add_field(
+        error_msg = discord.Embed(title=" ", description=" ", color=0xffb12b)
+        error_msg.add_field(
             name="Error", value="please enter a valid choice: ``odd`` or ``even``\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-        await ctx.send(embed=Finthechat)
+        await ctx.send(embed=error_msg)
 
 
 @bot.command()
@@ -3544,17 +3257,15 @@ async def findnum(ctx, *, message):
             await ctx.send(f"💀 **Fail!** you guessed it wrong. The number was ``{x}``")
             return
     except ValueError:
-        Finthechat = discord.Embed(title=" ", description=" ", color=0xffb12b)
-        Finthechat.add_field(
+        error_msg = discord.Embed(title=" ", description=" ", color=0xffb12b)
+        error_msg.add_field(
             name="Error", value="please enter a valid number between ``1`` to ``10``\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
-        await ctx.send(embed=Finthechat)
+        await ctx.send(embed=error_msg)
 
 
 @bot.command()
 @commands.cooldown(1, 30, commands.BucketType.user)
 async def hack(ctx, user: discord.Member = None):
-    bruh = ["Bumfuzzle", "Cattywampus", "Gardyloo", "Taradiddle",
-            "Snickersnee", "Widdershins", "Collywobbles", "Gubbins"]
     if user == None:
         user = ctx.author
         await ctx.send("ayo forgot to mention someone? I guess I'll have to hack you...")
@@ -3571,7 +3282,7 @@ async def hack(ctx, user: discord.Member = None):
     await asyncio.sleep(1)
     h = await ctx.send("fetching client's gmail account and password... ")
     await asyncio.sleep(1)
-    await h.edit(content=f"Gmail: ``{user}@aurorafan.com``\npassword: ``"+random.choice(bruh)+"``")
+    await h.edit(content=f"Gmail: ``{user}@aurorafan.com``\npassword: ``"+random.choice(fake_pwds)+"``")
     await asyncio.sleep(1)
     await h.edit(content="retrieving friends list.")
     await h.edit(content="retrieving friends list..")
@@ -3687,7 +3398,6 @@ async def anime(ctx):
             await answer.reply("**GOOD JOB!** type ``.anime`` to play again")
             break
         elif answer.content.lower() == ".anime":
-            pass
             return
 
 
@@ -3718,8 +3428,288 @@ async def geo(ctx):
             await answer.reply("**GOOD JOB!** type ``.geo`` to play again")
             break
         elif answer.content.lower() == ".geo":
-            pass
             return
+
+
+@bot.group(name="market", invoke_without_command=True)
+async def market(ctx):
+    await ctx.send("UNDER DEV")
+
+    cursor.execute(
+        "SELECT * FROM user_market WHERE client_id = %s", [ctx.author.id])
+    result = cursor.fetchall()
+
+    if len(result) == 0:
+        cursor.execute(
+            "INSERT INTO user_market VALUES(%s, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)", [ctx.author.id])
+        db.commit()
+
+    mp = discord.Embed(
+        title="MARKETPLACE", description="run ``.market info`` to learn more\nThe Following are the items you can buy from respective companies", color=random.choice(colors))
+    mp.add_field(name="Essencery",
+                 value=f"Potato ─ 10 | *ID* → ``potato``\nCorn ─ 20 | *ID* → ``corn``\nCookies ─ 50 | *ID* → ``cookies``", inline=False)
+    mp.add_field(name="Books & Co.",
+                 value=f"Pens ─ 5 | *ID* → ``pens``\nSheets ─ 10 | *ID* → ``sheets``\nManga ─ 1000 | *ID* → ``manga``", inline=False)
+    mp.add_field(name="Utlity Mart", value=f"Screws ─ 20 | *ID* → ``screws``\nHammer ─ 400 | *ID* → ``hammer``\nPower Drill ─ 2000 | *ID* → ``pwrdrill``", inline=False)
+    mp.add_field(name="Solitare", value=f"Gold ─ 10000 | *ID* → ``gold``\nPlatinum ─ 15000 | *ID* → ``plat``\nDiamond ─ 20000 | *ID* → ``diamond``", inline=False)
+    mp.set_footer(text="run < .market buy id quantity > to buy these items")
+    await ctx.send(embed=mp)
+
+
+@market.command(name="info")
+async def market_info(ctx):
+    await ctx.send("UNDER DEV")
+
+    cursor.execute(
+        "SELECT * FROM user_market WHERE client_id = %s", [ctx.author.id])
+    result = cursor.fetchall()
+
+    if len(result) == 0:
+        cursor.execute(
+            "INSERT INTO user_market VALUES(%s, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)", [ctx.author.id])
+        db.commit()
+
+    mi = discord.Embed(title="MARKETPLACE - INFO",
+                       description="⚠️ Please read the following carefully: every aspect of this is completely fictional and any refrences to real life is purely  coincidental", color=random.choice(colors))
+    mi.add_field(name="Basic Idea",
+                 value="To be the richest, your main focus would be to become rich", inline=False)
+    mi.add_field(name="How is it done?", value="by running ``.market`` you can buy items, This works in favor of the company selling the particular item. You can also invest in companies by ``.stocks``, keep in mind you can make/lose coins depending upon the company's stock prices", inline=False)
+    mi.add_field(name="Basic things you need to know",
+                 value="If a certain item is bought alot its value is bound to decrease, which may be beneficial to the particular company selling this 'item' hence affecting its stock prices and Net Worth", inline=False)
+    mi.add_field(name="A few Rules", value="``1.`` All transactions of coins are your responsibility\n``2.`` If you lose coins after investing, its again your responsibility and refunds will not be entertained", inline=False)
+    await ctx.send(embed=mi)
+
+
+@market.command(name="buy")
+async def market_buy(ctx):
+    await ctx.send("UNDER DEV")
+
+
+@bot.group(name="stocks", aliases=["stock"], invoke_without_command=True)
+async def stocks(ctx):
+    await ctx.send("UNDER DEV")
+
+
+@bot.event
+async def on_command_error(ctx, error):
+    error = getattr(error, 'original', error)
+    if isinstance(error, commands.MissingPermissions):
+        await ctx.send("You can't do that :( ")
+    elif isinstance(error, commands.MemberNotFound):
+        error_msg = discord.Embed(title=" ", description=" ", color=0xffb12b)
+        error_msg.add_field(
+            name="Error", value="Please mention a user\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
+        await ctx.send(embed=error_msg)
+    elif isinstance(error, commands.MissingRequiredArgument):
+        if ctx.command.name == "findnum":
+            error_msg = discord.Embed(
+                title=" ", description=" ", color=0xffb12b)
+            error_msg.add_field(
+                name="Error", value="please enter a valid number between 1 to 10 (not decimal)\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
+            await ctx.send(embed=error_msg)
+        elif ctx.command.name == "8ball":
+            error_msg = discord.Embed(
+                title=" ", description=" ", color=0xffb12b)
+            error_msg.add_field(
+                name="Error", value="please type down a message after the ``.8ball``\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
+            await ctx.reply(embed=error_msg, mention_author=False)
+        elif ctx.command.name == "dp":
+            error_msg = discord.Embed(
+                title=" ", description=" ", color=0xffb12b)
+            error_msg.add_field(
+                name="Error", value="please enter the number of items you want\nformat: ``.shop <item> <number>``\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
+            await ctx.reply(embed=error_msg, mention_author=False)
+        elif ctx.command.name == "hp":
+            error_msg = discord.Embed(
+                title=" ", description=" ", color=0xffb12b)
+            error_msg.add_field(
+                name="Error", value="please enter the number of items you want\nformat: ``.shop <item> <number>``\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
+            await ctx.reply(embed=error_msg, mention_author=False)
+        elif ctx.command.name == "vp":
+            error_msg = discord.Embed(
+                title=" ", description=" ", color=0xffb12b)
+            error_msg.add_field(
+                name="Error", value="please enter the number of items you want\nformat: ``.shop <item> <number>``\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
+            await ctx.reply(embed=error_msg, mention_author=False)
+        elif ctx.command.name == "slots":
+            error_msg = discord.Embed(
+                title=" ", description=" ", color=0xffb12b)
+            error_msg.add_field(
+                name="Error", value="please enter a valid amount to gamble with\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
+            await ctx.reply(embed=error_msg, mention_author=False)
+        else:
+            error_msg = discord.Embed(
+                title=" ", description=" ", color=0xffb12b)
+            error_msg.add_field(
+                name="Error", value="please enter the necessary arguments\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
+            await ctx.send(embed=error_msg)
+    elif isinstance(error, commands.CommandOnCooldown):
+        if ctx.command.name == "meme":
+            cool = discord.Embed(title="Slow it down",
+                                 description=" ", color=0xa58fff)
+            cool.add_field(
+                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.meme`` is ``1s``\nTry again in ``{error.retry_after:.2f}s``")
+            await ctx.send(embed=cool)
+        elif ctx.command.name == "highlow":
+            cool = discord.Embed(title="Slow it down",
+                                 description=" ", color=0xa58fff)
+            cool.add_field(
+                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.highlow`` is ``10s``\nTry again in ``{error.retry_after:.2f}s``")
+            await ctx.send(embed=cool)
+        elif ctx.command.name == "anime":
+            cool = discord.Embed(title="Slow it down",
+                                 description=" ", color=0xa58fff)
+            cool.add_field(
+                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.anime`` is ``5s``\nTry again in ``{error.retry_after:.2f}s``")
+            await ctx.send(embed=cool)
+        elif ctx.command.name == "geo":
+            cool = discord.Embed(title="Slow it down",
+                                 description=" ", color=0xa58fff)
+            cool.add_field(
+                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.geo`` is ``5s``\nTry again in ``{error.retry_after:.2f}s``")
+            await ctx.send(embed=cool)
+        elif ctx.command.name == "sw":
+            cool = discord.Embed(title="Slow it down",
+                                 description=" ", color=0xa58fff)
+            cool.add_field(
+                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.sw`` is ``5s``\nTry again in ``{error.retry_after:.2f}s``")
+            await ctx.send(embed=cool)
+        elif ctx.command.name == "shoot":
+            cool = discord.Embed(title="Slow it down",
+                                 description=" ", color=0xa58fff)
+            cool.add_field(
+                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.shoot`` is ``3s``\nTry again in ``{error.retry_after:.2f}s``")
+            await ctx.send(embed=cool)
+        elif ctx.command.name == "kickball":
+            cool = discord.Embed(title="Slow it down",
+                                 description=" ", color=0xa58fff)
+            cool.add_field(
+                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.kickball`` is ``3s``\nTry again in ``{error.retry_after:.2f}s``")
+            await ctx.send(embed=cool)
+        elif ctx.command.name == "bowl":
+            cool = discord.Embed(title="Slow it down",
+                                 description=" ", color=0xa58fff)
+            cool.add_field(
+                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.bowl`` is ``3s``\nTry again in ``{error.retry_after:.2f}s``")
+            await ctx.send(embed=cool)
+        elif ctx.command.name == "hack":
+            cool = discord.Embed(title="Slow it down",
+                                 description=" ", color=0xa58fff)
+            cool.add_field(
+                name="⏪ ⏪ ⏪", value=f"don't hack people too much, Default cooldown for ``.hack`` is ``30s``\nTry again in ``{error.retry_after:.2f}s``")
+            await ctx.send(embed=cool)
+        elif ctx.command.name == "quest":
+            cool = discord.Embed(title="Slow it down",
+                                 description=" ", color=0xa58fff)
+            cool.add_field(
+                name="⏪ ⏪ ⏪", value=f"you have already hunted enough, Default cooldown for ``.quest`` is ``30s``\nTry again in ``{error.retry_after:.2f}s``")
+            await ctx.send(embed=cool)
+        elif ctx.command.name == "train":
+            cool = discord.Embed(title="Slow it down",
+                                 description=" ", color=0xa58fff)
+            cool.add_field(
+                name="⏪ ⏪ ⏪", value=f"you have already trained, Default cooldown for ``.train`` is ``45s``\nTry again in ``{error.retry_after:.2f}s``")
+            await ctx.send(embed=cool)
+        elif ctx.command.name == "dp":
+            cool = discord.Embed(title="Slow it down",
+                                 description=" ", color=0xa58fff)
+            cool.add_field(
+                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.buy`` and ``.use`` is ``20s``\nTry again in ``{error.retry_after:.2f}s``")
+            await ctx.send(embed=cool)
+        elif ctx.command.name == "hp":
+            cool = discord.Embed(title="Slow it down",
+                                 description=" ", color=0xa58fff)
+            cool.add_field(
+                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.buy`` and ``.use`` is ``20s``\nTry again in ``{error.retry_after:.2f}s``")
+            await ctx.send(embed=cool)
+        elif ctx.command.name == "vp":
+            cool = discord.Embed(title="Slow it down",
+                                 description=" ", color=0xa58fff)
+            cool.add_field(
+                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.buy`` and ``.use`` is ``20s``\nTry again in ``{error.retry_after:.2f}s``")
+            await ctx.send(embed=cool)
+        elif ctx.command.name == "qg":
+            cool = discord.Embed(title="Slow it down",
+                                 description=" ", color=0xa58fff)
+            cool.add_field(
+                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.buy`` and ``.use`` is ``20s``\nTry again in ``{error.retry_after:.2f}s``")
+            await ctx.send(embed=cool)
+        elif ctx.command.name == "eb":
+            cool = discord.Embed(title="Slow it down",
+                                 description=" ", color=0xa58fff)
+            cool.add_field(
+                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.buy`` and ``.use`` is ``20s``\nTry again in ``{error.retry_after:.2f}s``")
+            await ctx.send(embed=cool)
+        elif ctx.command.name == "orb":
+            cool = discord.Embed(title="Slow it down",
+                                 description=" ", color=0xa58fff)
+            cool.add_field(
+                name="⏪ ⏪ ⏪", value=f"Default cooldown for this item\n``.buy`` - ``20s``\n``.use`` - ``3hr``\nTry again in ``{error.retry_after:.2f}s``")
+            await ctx.send(embed=cool)
+        elif ctx.command.name == "molecule":
+            cool = discord.Embed(title="Slow it down",
+                                 description=" ", color=0xa58fff)
+            cool.add_field(
+                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.buy`` and ``.use`` is ``20s``\nTry again in ``{error.retry_after:.2f}s``")
+            await ctx.send(embed=cool)
+        elif ctx.command.name == "box":
+            cool = discord.Embed(title="Slow it down",
+                                 description=" ", color=0xa58fff)
+            cool.add_field(
+                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.box`` is ``2m``\nTry again in ``{error.retry_after:.2f}s``")
+            await ctx.send(embed=cool)
+        elif ctx.command.name == "slots":
+            cool = discord.Embed(title="Slow it down",
+                                 description=" ", color=0xa58fff)
+            cool.add_field(
+                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.slots`` is ``10s``\nTry again in ``{error.retry_after:.2f}s``")
+            await ctx.send(embed=cool)
+        elif ctx.command.name == "duel":
+            cool = discord.Embed(title="Slow it down",
+                                 description=" ", color=0xa58fff)
+            cool.add_field(
+                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.duel`` is ``5m``\nTry again in ``{error.retry_after:.2f}s``")
+            await ctx.send(embed=cool)
+        elif ctx.command.name == "fight":
+            cool = discord.Embed(title="Slow it down",
+                                 description=" ", color=0xa58fff)
+            cool.add_field(
+                name="⏪ ⏪ ⏪", value=f"Default cooldown for ``.fight`` is ``30s``\nTry again in ``{error.retry_after:.2f}s``")
+            await ctx.send(embed=cool)
+    elif isinstance(error, discord.Forbidden):
+        if ctx.command.name == "purge":
+            error_msg = discord.Embed(
+                title=" ", description=" ", color=0xffb12b)
+            error_msg.add_field(
+                name="Error", value="I'm missing the manage messages permission!\n_ _\n**Check the following:**\nAurora BOT Role permissions\nChannel permissions\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
+            await ctx.send(embed=error_msg)
+        else:
+            error_msg = discord.Embed(
+                title=" ", description=" ", color=0xffb12b)
+            error_msg.add_field(
+                name="Error", value="I'm missing the manage messages permission!\n_ _\n**Check the following:**\nAurora BOT Role permissions\nChannel permissions\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
+            await ctx.send(embed=error_msg)
+    elif isinstance(error, commands.CommandInvokeError):
+        if ctx.command.name == "perm":
+            error_msg = discord.Embed(
+                title=" ", description=" ", color=0xffb12b)
+            error_msg.add_field(
+                name="Error", value="The output was more than 2000 characters, maybe try shortening your argument\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
+            await ctx.send(embed=error_msg)
+    elif isinstance(error, discord.HTTPException):
+        if ctx.command.name == "perm":
+            error_msg = discord.Embed(
+                title=" ", description=" ", color=0xffb12b)
+            error_msg.add_field(
+                name="Error", value="The output was more than 2000 characters, maybe try shortening your argument\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
+            await ctx.send(embed=error_msg)
+    elif isinstance(error, commands.BadArgument):
+        if ctx.command.name == "perm":
+            error_msg = discord.Embed(
+                title=" ", description=" ", color=0xffb12b)
+            error_msg.add_field(
+                name="Error", value="Space the numbers and try again\nSupport Server: [Join!](https://discord.gg/G9vTrsV4aG)")
+            await ctx.send(embed=error_msg)
 
 
 db.commit()
