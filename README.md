@@ -13,7 +13,7 @@ The support links (the discord server is deleted) and the bot's page in [top.gg]
 
 ## Bug Reports
 
-We apologize for any inconvenience caused. As the bot is currently offline, we regret to inform you that there is no support server available for reporting bugs. 
+Apologies for any inconvenience caused. As the bot is currently offline, we regret to inform you that there is no support server available for reporting bugs. 
 
 ## Commands
 
