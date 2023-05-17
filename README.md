@@ -1,27 +1,35 @@
-## Aurora - Discord Bot
+![aurora](https://github.com/ycatsh/aurora/assets/91330011/e540429e-6f02-4fe3-ac12-1b7b0d9df916)
 
-This bot has been discontinued. It integrated with a database; structure of the database will be added shortly.  
-Some of the code is outdated because  the bot has been made inactive since mid 2021.
+Aurora is a [discord](https://discord.com/) bot made with [python](https://www.python.org/) and the [discord.py](https://discordpy.readthedocs.io/en/stable/) API. Unfortunately the bot has been discontinued due to hosting costs. It's integrated with a database; structure of the database will be added shortly. Some of the code is outdated because the bot has been made inactive since mid 2021.  
 
-### Commands:
+The support links (the discord server is deleted) and the bot's page in [top.gg](https://top.gg/) and other sites have also been discontinued. Therefore, it is not available on these websites anymore. The bot is private and cannot be invited to any servers at the moment, if any advancements occur, this file will be updated as soon as possible.
 
-- It has tons of features such as a role-playing game featuring functional commands which pull and interact with data stored in a MySQL database, examples:  
-  ```.quest``` to gain experience points and coins  
-  ```.train``` to train your stats and gain coins  
-  ```.fight``` use your items and combat against NPC  
-  ```.duel``` fight against your friends in a duel  
-  
-- The bot also has a guessing game that displays a picture of a certain character, place, or setting allowing the user to guess the said picture:  
-  ```.anime``` for anime characters and settings  
-  ```.geo``` for geographical locations, etc.  
-  
-- Moreover, it consists of fun minigames using emojis, small vector images, and discord reactions/messages:  
-  ```.bbgame``` simple basketball shooting game  
-  ```.fbgame``` simple football game  
-  ```.blgame``` simple bowling game
-  
-(Also has utility, math, and other fun commands to choose from)
+## Features
 
-### Info:
-The support links (the discord server is deleted) and the bot's page in top.gg and other sites have also been discontinued. Therefore, it is not available on these websites anymore.  
-The bot is private and cannot be invited to any servers at the moment, if any advancements occur, this file will be updated as soon as possible.
+- Multiplayer action role playing game 
+- An intuitive guessing game for anime and geographic locations 
+- Fun commands to mess with your friends on discord 
+
+
+## Bug Reports
+
+We apologize for any inconvenience caused. As the bot is currently offline, we regret to inform you that there is no support server available for reporting bugs. 
+
+## Commands
+
+Aurora offers a diverse selection of commands to enhance your Discord bot experience. Below are some of the major  commands that are available:
+
+| Name         | Description                                                |
+| ------------ | -----------------------------------------------------------|
+| `.quest`     | Go on a quest to gain experience points and coins          |
+| `.train`     | Train your player stats and earn coins                     |
+| `.fight`     | Engage in combat against NPCs using your items             |
+| `.duel`      | Participate in RPG-style duels with your friends           |
+| `.anime`     | Guess the name of the anime from characters and settings   |
+| `.geo`       | Guess the name of a location from pictures                 |
+| `.bbgame`    | Play a simple basketball shooting game using power levels  |
+| `.fbgame`    | Enjoy a simple football game by selecting where to shoot   |
+| `.blgame`    | Enjoy a game of bowling and aim for a strike               |
+
+In addition, there are other miscellaneous commands such as `.utility` and `.fun` that you can explore.
+
