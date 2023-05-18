@@ -2,7 +2,7 @@
 
 Aurora is a [discord](https://discord.com/) bot made with [python](https://www.python.org/) and the [discord.py](https://discordpy.readthedocs.io/en/stable/) API. Unfortunately the bot has been discontinued due to hosting costs. It's integrated with a database; structure of the database will be added shortly. Some of the code is outdated because the bot has been made inactive since mid 2021.  
 
-The support links (the discord server is deleted) and the bot's page in [top.gg](https://top.gg/) and other sites have also been discontinued. Therefore, it is not available on these websites anymore. The bot is private and cannot be invited to any servers at the moment, if any advancements occur, this file will be updated as soon as possible.
+The support links, the discord server, and the bot's page in [top.gg](https://top.gg/) and other sites have also been discontinued. Therefore, it is not available on these websites anymore. The bot is private and cannot be invited to any servers at the moment, if any advancements occur, this file will be updated as soon as possible.
 
 ## Features
 
